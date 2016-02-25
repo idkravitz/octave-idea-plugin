@@ -11,21 +11,15 @@ import static com.octaveide.psi.OctaveTypes.*;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.octaveide.psi.*;
 
-public class OctaveExprImpl extends ASTWrapperPsiElement implements OctaveExpr {
+public class OctaveLiteralImpl extends ASTWrapperPsiElement implements OctaveLiteral {
 
-  public OctaveExprImpl(ASTNode node) {
+  public OctaveLiteralImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof OctaveVisitor) ((OctaveVisitor)visitor).visitExpr(this);
+    if (visitor instanceof OctaveVisitor) ((OctaveVisitor)visitor).visitLiteral(this);
     else super.accept(visitor);
-  }
-
-  @Override
-  @Nullable
-  public OctaveLiteral getLiteral() {
-    return findChildByClass(OctaveLiteral.class);
   }
 
 }

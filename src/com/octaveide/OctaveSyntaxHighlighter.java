@@ -35,7 +35,7 @@ public class OctaveSyntaxHighlighter extends SyntaxHighlighterBase {
     static {
         fillMap(ATTRIBUTES, OctaveParserDefinition.OPERATORS, OPERATOR);
         fillMap(ATTRIBUTES, OctaveParserDefinition.COMMENTS, COMMENT);
-        fillMap(ATTRIBUTES, NUMBER, OctaveTypes.NUMBER);
+        fillMap(ATTRIBUTES, OctaveParserDefinition.NUMBERS, NUMBER);
         fillMap(ATTRIBUTES, SEMICOLON, OctaveTypes.SEMICOLON);
         fillMap(ATTRIBUTES, BAD_CHARACTER, TokenType.BAD_CHARACTER);
     }

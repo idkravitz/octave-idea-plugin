@@ -10,14 +10,14 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.octaveide.psi.OctaveTypes.*;
 import com.octaveide.psi.*;
 
-public class OctaveAddExprImpl extends OctaveBinaryExprImpl implements OctaveAddExpr {
+public class OctaveBinaryExprImpl extends OctaveExprImpl implements OctaveBinaryExpr {
 
-  public OctaveAddExprImpl(ASTNode node) {
+  public OctaveBinaryExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof OctaveVisitor) ((OctaveVisitor)visitor).visitAddExpr(this);
+    if (visitor instanceof OctaveVisitor) ((OctaveVisitor)visitor).visitBinaryExpr(this);
     else super.accept(visitor);
   }
 
@@ -25,6 +25,20 @@ public class OctaveAddExprImpl extends OctaveBinaryExprImpl implements OctaveAdd
   @NotNull
   public List<OctaveExpr> getExprList() {
     return PsiTreeUtil.getChildrenOfTypeAsList(this, OctaveExpr.class);
+  }
+
+  @Override
+  @NotNull
+  public OctaveExpr getLeft() {
+    List<OctaveExpr> p1 = getExprList();
+    return p1.get(0);
+  }
+
+  @Override
+  @Nullable
+  public OctaveExpr getRight() {
+    List<OctaveExpr> p1 = getExprList();
+    return p1.size() < 2 ? null : p1.get(1);
   }
 
 }

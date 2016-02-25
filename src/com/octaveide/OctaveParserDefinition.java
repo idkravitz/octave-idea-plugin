@@ -20,7 +20,9 @@ import org.jetbrains.annotations.NotNull;
 public class OctaveParserDefinition implements ParserDefinition {
     public static final TokenSet WHITE_SPACES = TokenSet.create(TokenType.WHITE_SPACE);
     public static final TokenSet COMMENTS = TokenSet.create(OctaveTypes.COMMENT);
-    public static final TokenSet OPERATORS = TokenSet.create(OctaveTypes.PLUS, OctaveTypes.MINUS);
+    public static final TokenSet OPERATORS = TokenSet.create(OctaveTypes.PLUS, OctaveTypes.MINUS,
+            OctaveTypes.MULTIPLY, OctaveTypes.DIVIDE, OctaveTypes.ASSIGN);
+    public static final TokenSet NUMBERS = TokenSet.create(OctaveTypes.INT, OctaveTypes.FLOAT);
 
     public static final IFileElementType FILE = new IFileElementType(Language.<OctaveLanguage>findInstance(OctaveLanguage.class));
 

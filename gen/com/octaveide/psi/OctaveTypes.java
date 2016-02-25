@@ -10,12 +10,18 @@ public interface OctaveTypes {
 
   IElementType ADD_EXPR = new OctaveElementType("ADD_EXPR");
   IElementType EXPR = new OctaveElementType("EXPR");
+  IElementType LITERAL = new OctaveElementType("LITERAL");
   IElementType STATEMENT = new OctaveElementType("STATEMENT");
 
+  IElementType ASSIGN = new OctaveTokenType("=");
   IElementType COMMENT = new OctaveTokenType("COMMENT");
   IElementType CRLF = new OctaveTokenType("CRLF");
+  IElementType DIVIDE = new OctaveTokenType("/");
+  IElementType FLOAT = new OctaveTokenType("float");
+  IElementType IDENTIFIER = new OctaveTokenType("identifier");
+  IElementType INT = new OctaveTokenType("int");
   IElementType MINUS = new OctaveTokenType("-");
-  IElementType NUMBER = new OctaveTokenType("NUMBER");
+  IElementType MULTIPLY = new OctaveTokenType("*");
   IElementType PLUS = new OctaveTokenType("+");
   IElementType SEMICOLON = new OctaveTokenType(";");
 
@@ -27,6 +33,9 @@ public interface OctaveTypes {
       }
       else if (type == EXPR) {
         return new OctaveExprImpl(node);
+      }
+      else if (type == LITERAL) {
+        return new OctaveLiteralImpl(node);
       }
       else if (type == STATEMENT) {
         return new OctaveStatementImpl(node);
