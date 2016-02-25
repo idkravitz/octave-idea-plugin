@@ -1,0 +1,28 @@
+{
+    parserClass="com.octaveide.parser.OctaveParser"
+    extends="com.intellij.extapi.psi.ASTWrapperPsiElement"
+
+    psiClassPrefix="Octave"
+    psiImplClassSuffix="Impl"
+    psiPackage="com.octaveide.psi"
+    psiImplPackage="com.octaveide.psi.impl"
+
+    elementTypeHolderClass="com.octaveide.psi.OctaveTypes"
+    elementTypeClass="com.octaveide.psi.OctaveElementType"
+    tokenTypeClass="com.octaveide.psi.OctaveTokenType"
+
+    psiImplUtilClass="com.octaveide.psi.impl.OctavePsiImplUtil"
+
+    tokens = [
+        PLUS='+'
+        MINUS='-'
+        SEMICOLON=';'
+    ]
+}
+
+octaveFile ::= item_*
+private item_ ::= (statement|COMMENT|CRLF)
+
+statement ::= expr (';'|CRLF)
+expr ::= add_expr
+add_expr ::= NUMBER '+' NUMBER
