@@ -24,16 +24,28 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     b = adapt_builder_(t, b, this, EXTENDS_SETS_);
     Marker m = enter_section_(b, 0, _COLLAPSE_, null);
     if (t == ADD_EXPR) {
-      r = add_expr(b, 0);
+      r = expr(b, 0, 0);
+    }
+    else if (t == ASSIGN_EXPR) {
+      r = expr(b, 0, -1);
     }
     else if (t == EXPR) {
-      r = expr(b, 0);
+      r = expr(b, 0, -1);
     }
-    else if (t == LITERAL) {
-      r = literal(b, 0);
+    else if (t == IDENTIFIER_EXPR) {
+      r = identifier_expr(b, 0);
+    }
+    else if (t == LITERAL_EXPR) {
+      r = literal_expr(b, 0);
+    }
+    else if (t == MUL_EXPR) {
+      r = expr(b, 0, 1);
     }
     else if (t == STATEMENT) {
       r = statement(b, 0);
+    }
+    else if (t == UNARY_EXPR) {
+      r = unary_expr(b, 0);
     }
     else {
       r = parse_root_(t, b, 0);
@@ -46,21 +58,9 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   }
 
   public static final TokenSet[] EXTENDS_SETS_ = new TokenSet[] {
-    create_token_set_(ADD_EXPR, EXPR),
+    create_token_set_(ADD_EXPR, ASSIGN_EXPR, EXPR, IDENTIFIER_EXPR,
+      LITERAL_EXPR, MUL_EXPR, UNARY_EXPR),
   };
-
-  /* ********************************************************** */
-  // expr add_op expr
-  public static boolean add_expr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "add_expr")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _COLLAPSE_, "<add expr>");
-    r = expr(b, l + 1);
-    r = r && add_op(b, l + 1);
-    r = r && expr(b, l + 1);
-    exit_section_(b, l, m, ADD_EXPR, r, false, null);
-    return r;
-  }
 
   /* ********************************************************** */
   // '+'|'-'
@@ -72,22 +72,6 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     r = consumeToken(b, PLUS);
     if (!r) r = consumeToken(b, MINUS);
     exit_section_(b, m, null, r);
-    return r;
-  }
-
-  /* ********************************************************** */
-  // add_expr
-  //     //| mul_expr
-  //     | literal
-  //     | identifier
-  public static boolean expr(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "expr")) return false;
-    boolean r;
-    Marker m = enter_section_(b, l, _COLLAPSE_, "<expr>");
-    r = add_expr(b, l + 1);
-    if (!r) r = literal(b, l + 1);
-    if (!r) r = consumeToken(b, IDENTIFIER);
-    exit_section_(b, l, m, EXPR, r, false, null);
     return r;
   }
 
@@ -126,16 +110,15 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // int
-  //     | float
-  public static boolean literal(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "literal")) return false;
-    if (!nextTokenIs(b, "<literal>", FLOAT, INT)) return false;
+  // '*'|'/'
+  static boolean mul_op(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "mul_op")) return false;
+    if (!nextTokenIs(b, "", MULTIPLY, DIVIDE)) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, "<literal>");
-    r = consumeToken(b, INT);
-    if (!r) r = consumeToken(b, FLOAT);
-    exit_section_(b, l, m, LITERAL, r, false, null);
+    Marker m = enter_section_(b);
+    r = consumeToken(b, MULTIPLY);
+    if (!r) r = consumeToken(b, DIVIDE);
+    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -158,7 +141,7 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "statement")) return false;
     boolean r;
     Marker m = enter_section_(b, l, _NONE_, "<statement>");
-    r = expr(b, l + 1);
+    r = expr(b, l + 1, -1);
     r = r && statement_1(b, l + 1);
     exit_section_(b, l, m, STATEMENT, r, false, null);
     return r;
@@ -173,6 +156,101 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     if (!r) r = consumeToken(b, CRLF);
     if (!r) r = eof(b, l + 1);
     exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // '+'|'-'
+  static boolean unary_op(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "unary_op")) return false;
+    if (!nextTokenIs(b, "", PLUS, MINUS)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, PLUS);
+    if (!r) r = consumeToken(b, MINUS);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // Expression root: expr
+  // Operator priority table:
+  // 0: BINARY(assign_expr)
+  // 1: BINARY(add_expr)
+  // 2: BINARY(mul_expr)
+  // 3: PREFIX(unary_expr)
+  // 4: ATOM(literal_expr) ATOM(identifier_expr)
+  public static boolean expr(PsiBuilder b, int l, int g) {
+    if (!recursion_guard_(b, l, "expr")) return false;
+    addVariant(b, "<expr>");
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, "<expr>");
+    r = unary_expr(b, l + 1);
+    if (!r) r = literal_expr(b, l + 1);
+    if (!r) r = identifier_expr(b, l + 1);
+    p = r;
+    r = r && expr_0(b, l + 1, g);
+    exit_section_(b, l, m, null, r, p, null);
+    return r || p;
+  }
+
+  public static boolean expr_0(PsiBuilder b, int l, int g) {
+    if (!recursion_guard_(b, l, "expr_0")) return false;
+    boolean r = true;
+    while (true) {
+      Marker m = enter_section_(b, l, _LEFT_, null);
+      if (g < 0 && consumeTokenSmart(b, ASSIGN)) {
+        r = expr(b, l, 0);
+        exit_section_(b, l, m, ASSIGN_EXPR, r, true, null);
+      }
+      else if (g < 1 && add_op(b, l + 1)) {
+        r = expr(b, l, 1);
+        exit_section_(b, l, m, ADD_EXPR, r, true, null);
+      }
+      else if (g < 2 && mul_op(b, l + 1)) {
+        r = expr(b, l, 2);
+        exit_section_(b, l, m, MUL_EXPR, r, true, null);
+      }
+      else {
+        exit_section_(b, l, m, null, false, false, null);
+        break;
+      }
+    }
+    return r;
+  }
+
+  public static boolean unary_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "unary_expr")) return false;
+    if (!nextTokenIsFast(b, PLUS, MINUS)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = unary_op(b, l + 1);
+    p = r;
+    r = p && expr(b, l, 3);
+    exit_section_(b, l, m, UNARY_EXPR, r, p, null);
+    return r || p;
+  }
+
+  // int | float
+  public static boolean literal_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "literal_expr")) return false;
+    if (!nextTokenIsFast(b, FLOAT, INT)) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<literal expr>");
+    r = consumeTokenSmart(b, INT);
+    if (!r) r = consumeTokenSmart(b, FLOAT);
+    exit_section_(b, l, m, LITERAL_EXPR, r, false, null);
+    return r;
+  }
+
+  // identifier
+  public static boolean identifier_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "identifier_expr")) return false;
+    if (!nextTokenIsFast(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokenSmart(b, IDENTIFIER);
+    exit_section_(b, m, IDENTIFIER_EXPR, r);
     return r;
   }
 

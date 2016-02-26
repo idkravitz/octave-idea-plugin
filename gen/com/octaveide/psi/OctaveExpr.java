@@ -7,7 +7,4 @@ import com.intellij.psi.PsiElement;
 
 public interface OctaveExpr extends PsiElement {
 
-  @Nullable
-  OctaveLiteral getLiteral();
-
 }

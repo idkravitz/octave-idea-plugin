@@ -22,8 +22,9 @@
         SEMICOLON=';'
     ]
 
-    extends("(assign|add|mul)_expr") = binary_expr
-    extends(".*_expr")=expr
+//    extends("(add|minus)_expr") = binary_expr
+    extends(".*expr")=expr
+//    consumeTokenMethod(".*_expr|expr")="consumeTokenFast"
 }
 
 octaveFile ::= item_*
@@ -31,25 +32,30 @@ private item_ ::= !<<eof>> (statement|CRLF|COMMENT)
 
 statement ::= expr (';'|CRLF|<<eof>>)
 
-expr ::= //assign_expr
-    add_expr
-    //| mul_expr
-    | literal
-    | identifier
+// the root expression rule
+expr ::= assign_expr
+    | add_expr
+    | mul_expr
+    | unary_expr
+    | primary_expr
 
-literal ::= int
-    | float
+private primary_expr ::= literal_expr | identifier_expr
+identifier_expr ::= identifier
+literal_expr ::= int | float
 
-//assign_expr ::= expr '=' expr
+assign_expr ::= expr '=' expr
+mul_expr ::= expr mul_op expr
 add_expr ::= expr add_op expr
-//mul_expr ::= expr mul_op expr
+unary_expr ::= unary_op expr
 
-fake binary_expr ::= expr+ {
-    methods=[
-        left="expr[0]"
-        right="expr[1]"
-    ]
-}
-
+private unary_op ::= '+'|'-'
 private add_op ::= '+'|'-'
-//private mul_op ::= '*'|'/'
+private mul_op ::= '*'|'/'
+
+//fake binary_expr ::= expr+ {
+//    methods=[
+//        left="expr[0]"
+//        right="expr[1]"
+//    ]
+//}
+

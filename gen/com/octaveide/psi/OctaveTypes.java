@@ -9,9 +9,13 @@ import com.octaveide.psi.impl.*;
 public interface OctaveTypes {
 
   IElementType ADD_EXPR = new OctaveElementType("ADD_EXPR");
+  IElementType ASSIGN_EXPR = new OctaveElementType("ASSIGN_EXPR");
   IElementType EXPR = new OctaveElementType("EXPR");
-  IElementType LITERAL = new OctaveElementType("LITERAL");
+  IElementType IDENTIFIER_EXPR = new OctaveElementType("IDENTIFIER_EXPR");
+  IElementType LITERAL_EXPR = new OctaveElementType("LITERAL_EXPR");
+  IElementType MUL_EXPR = new OctaveElementType("MUL_EXPR");
   IElementType STATEMENT = new OctaveElementType("STATEMENT");
+  IElementType UNARY_EXPR = new OctaveElementType("UNARY_EXPR");
 
   IElementType ASSIGN = new OctaveTokenType("=");
   IElementType COMMENT = new OctaveTokenType("COMMENT");
@@ -31,14 +35,26 @@ public interface OctaveTypes {
        if (type == ADD_EXPR) {
         return new OctaveAddExprImpl(node);
       }
+      else if (type == ASSIGN_EXPR) {
+        return new OctaveAssignExprImpl(node);
+      }
       else if (type == EXPR) {
         return new OctaveExprImpl(node);
       }
-      else if (type == LITERAL) {
-        return new OctaveLiteralImpl(node);
+      else if (type == IDENTIFIER_EXPR) {
+        return new OctaveIdentifierExprImpl(node);
+      }
+      else if (type == LITERAL_EXPR) {
+        return new OctaveLiteralExprImpl(node);
+      }
+      else if (type == MUL_EXPR) {
+        return new OctaveMulExprImpl(node);
       }
       else if (type == STATEMENT) {
         return new OctaveStatementImpl(node);
+      }
+      else if (type == UNARY_EXPR) {
+        return new OctaveUnaryExprImpl(node);
       }
       throw new AssertionError("Unknown element type: " + type);
     }

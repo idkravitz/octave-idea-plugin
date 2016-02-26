@@ -5,9 +5,9 @@ import java.util.List;
 import org.jetbrains.annotations.*;
 import com.intellij.psi.PsiElement;
 
-public interface OctaveAddExpr extends OctaveExpr {
+public interface OctaveUnaryExpr extends OctaveExpr {
 
-  @NotNull
-  List<OctaveExpr> getExprList();
+  @Nullable
+  OctaveExpr getExpr();
 
 }

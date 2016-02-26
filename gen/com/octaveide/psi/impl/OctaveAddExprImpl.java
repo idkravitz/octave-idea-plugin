@@ -10,7 +10,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import static com.octaveide.psi.OctaveTypes.*;
 import com.octaveide.psi.*;
 
-public class OctaveAddExprImpl extends OctaveBinaryExprImpl implements OctaveAddExpr {
+public class OctaveAddExprImpl extends OctaveExprImpl implements OctaveAddExpr {
 
   public OctaveAddExprImpl(ASTNode node) {
     super(node);

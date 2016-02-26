@@ -8,10 +8,10 @@ import com.intellij.psi.PsiElement;
 public class OctaveVisitor extends PsiElementVisitor {
 
   public void visitAddExpr(@NotNull OctaveAddExpr o) {
-    visitBinaryExpr(o);
+    visitExpr(o);
   }
 
-  public void visitBinaryExpr(@NotNull OctaveBinaryExpr o) {
+  public void visitAssignExpr(@NotNull OctaveAssignExpr o) {
     visitExpr(o);
   }
 
@@ -19,12 +19,24 @@ public class OctaveVisitor extends PsiElementVisitor {
     visitPsiElement(o);
   }
 
-  public void visitLiteral(@NotNull OctaveLiteral o) {
-    visitPsiElement(o);
+  public void visitIdentifierExpr(@NotNull OctaveIdentifierExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitLiteralExpr(@NotNull OctaveLiteralExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitMulExpr(@NotNull OctaveMulExpr o) {
+    visitExpr(o);
   }
 
   public void visitStatement(@NotNull OctaveStatement o) {
     visitPsiElement(o);
+  }
+
+  public void visitUnaryExpr(@NotNull OctaveUnaryExpr o) {
+    visitExpr(o);
   }
 
   public void visitPsiElement(@NotNull PsiElement o) {

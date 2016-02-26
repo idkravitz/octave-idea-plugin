@@ -8,17 +8,16 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.util.PsiTreeUtil;
 import static com.octaveide.psi.OctaveTypes.*;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.octaveide.psi.*;
 
-public class OctaveExprImpl extends ASTWrapperPsiElement implements OctaveExpr {
+public class OctaveLiteralExprImpl extends OctaveExprImpl implements OctaveLiteralExpr {
 
-  public OctaveExprImpl(ASTNode node) {
+  public OctaveLiteralExprImpl(ASTNode node) {
     super(node);
   }
 
   public void accept(@NotNull PsiElementVisitor visitor) {
-    if (visitor instanceof OctaveVisitor) ((OctaveVisitor)visitor).visitExpr(this);
+    if (visitor instanceof OctaveVisitor) ((OctaveVisitor)visitor).visitLiteralExpr(this);
     else super.accept(visitor);
   }
 
