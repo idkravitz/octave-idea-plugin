@@ -2,21 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bfa6a96c-742d-474d-9e4e-13c4a973c6f4" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/parser/OctaveParser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/OctaveAddExpr.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/OctaveBinaryExpr.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/OctaveExpr.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/OctaveLiteral.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/OctaveStatement.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/OctaveTypes.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/OctaveVisitor.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/impl/OctaveAddExprImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/impl/OctaveBinaryExprImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/impl/OctaveExprImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/impl/OctaveLiteralImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/impl/OctaveStatementImpl.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/octaveide/parser/OctaveParser.java" afterPath="$PROJECT_DIR$/gen/com/octaveide/parser/OctaveParser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/octaveide/psi/OctaveTypes.java" afterPath="$PROJECT_DIR$/gen/com/octaveide/psi/OctaveTypes.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/grammar/octave.bnf" afterPath="$PROJECT_DIR$/grammar/octave.bnf" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/octaveide/OctaveParserDefinition.java" afterPath="$PROJECT_DIR$/src/com/octaveide/OctaveParserDefinition.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer.flex" afterPath="$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer.flex" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer.java" afterPath="$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer.java" />
     </list>
     <ignored path="octave-idea-plugin.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,14 +31,107 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="octave.bnf" pinned="false" current-in-tab="true">
+      <file leaf-file-name="octave.bnf" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/grammar/octave.bnf">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.23372287">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_OctaveLexer.flex" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer.flex">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.70247936">
+              <caret line="87" column="58" selection-start-line="87" selection-start-column="58" selection-end-line="87" selection-end-column="58" />
               <folding>
-                <element signature="e#0#765#0" expanded="true" />
+                <marker date="1456477151602" expanded="true" signature="37:191" placeholder="..." />
+                <marker date="1456477151602" expanded="false" signature="223:230" placeholder=" { " />
+                <marker date="1456477151602" expanded="false" signature="257:261" placeholder=" }" />
+                <marker date="1456477151602" expanded="true" signature="670:721" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="746:783" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="807:841" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="865:900" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="924:957" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="981:1021" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1046:1083" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1107:1144" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1168:1205" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1229:1266" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1290:1331" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1355:1397" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1421:1466" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1490:1532" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1556:1598" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1622:1664" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1688:1741" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1765:1815" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1839:1889" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1913:1963" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="1987:2034" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2058:2106" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2130:2164" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2188:2223" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2247:2282" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2306:2341" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2365:2400" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2424:2459" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2483:2521" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2545:2587" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2611:2650" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2674:2713" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2737:2776" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2800:2848" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2872:2911" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2935:2970" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="2994:3045" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3069:3111" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3135:3176" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3200:3241" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3265:3301" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3325:3367" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3391:3434" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3458:3501" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3525:3568" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3592:3635" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3659:3702" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3726:3772" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3796:3831" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3855:3890" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3914:3947" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="3971:4006" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="4030:4063" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="4087:4119" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="4143:4184" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="4208:4248" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="4272:4311" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="4300:4311" placeholder="{...}" />
+                <marker date="1456477151602" expanded="true" signature="4321:4354" placeholder="{...}" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="_OctaveLexer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OctaveTypes.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/gen/com/octaveide/psi/OctaveTypes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="74" selection-end-column="53" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -65,8 +150,20 @@
         <entry file="file://$PROJECT_DIR$/src/com/octaveide/OctaveParserDefinition.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
-              <folding />
+              <caret line="32" column="85" selection-start-line="32" selection-start-column="85" selection-end-line="32" selection-end-column="85" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1952#1953#0" expanded="true" />
+                <element signature="e#1999#2000#0" expanded="true" />
+                <element signature="e#2067#2068#0" expanded="true" />
+                <element signature="e#2108#2109#0" expanded="true" />
+                <element signature="e#2171#2172#0" expanded="true" />
+                <element signature="e#2198#2199#0" expanded="true" />
+                <element signature="e#2270#2271#0" expanded="true" />
+                <element signature="e#2305#2306#0" expanded="true" />
+                <element signature="e#2374#2375#0" expanded="true" />
+                <element signature="e#2405#2406#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -166,11 +263,12 @@
         <option value="$PROJECT_DIR$/resources/META-INF/plugin.xml" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/src/com/octaveide/OctaveSyntaxHighlighter.java" />
-        <option value="$PROJECT_DIR$/src/com/octaveide/OctaveParserDefinition.java" />
-        <option value="$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer.flex" />
         <option value="$PROJECT_DIR$/../octavetest.oc" />
         <option value="$PROJECT_DIR$/grammar/exp.bnf" />
         <option value="$PROJECT_DIR$/grammar/octave.bnf" />
+        <option value="$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer2.flex" />
+        <option value="$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer.flex" />
+        <option value="$PROJECT_DIR$/src/com/octaveide/OctaveParserDefinition.java" />
       </list>
     </option>
   </component>
@@ -180,9 +278,10 @@
     <detection-done>true</detection-done>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-7" />
-    <option name="width" value="974" />
-    <option name="height" value="1047" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -318,6 +417,10 @@
               <option name="myItemId" value="octaveide" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="psi" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -349,7 +452,7 @@
   <component name="PropertiesComponent">
     <property name="aspect.path.notification.shown" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../go-lang-idea-plugin/gen/com/goide/parser/GoParser.java" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer2.flex" />
     <property name="project.structure.last.edited" value="Global Libraries" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -884,15 +987,15 @@
       <workItem from="1456388049607" duration="6298000" />
       <workItem from="1456394416946" duration="7385000" />
       <workItem from="1456472959962" duration="92000" />
-      <workItem from="1456473300639" duration="2126000" />
+      <workItem from="1456473300639" duration="4026000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20760000" />
+    <option name="totallyTimeSpent" value="22660000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -903,10 +1006,10 @@
       <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33084312" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33015874" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31732777" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3171875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -920,6 +1023,32 @@
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32980973" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="PsiViewer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.33084312" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31732777" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3991462" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -966,9 +1095,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#765#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1033,9 +1160,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#765#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1115,9 +1240,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#765#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1126,7 +1249,7 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="imports" expanded="false" />
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1308,21 +1431,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="499" column="0" selection-start-line="499" selection-start-column="0" selection-end-line="499" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer.flex">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="8" selection-start-line="43" selection-start-column="8" selection-end-line="43" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/octaveide/OctaveSyntaxHighlighterFactory.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1397,10 +1505,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/octaveide/OctaveParserDefinition.java">
+    <entry file="file://$PROJECT_DIR$/grammar/octave.bnf">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="27" selection-start-line="14" selection-start-column="27" selection-end-line="14" selection-end-column="27" />
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1413,12 +1521,111 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/grammar/octave.bnf">
+    <entry file="file://$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23372287">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
           <folding>
-            <element signature="e#0#765#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gen/com/octaveide/psi/OctaveTypes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="74" selection-end-column="53" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/octaveide/OctaveParserDefinition.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="85" selection-start-line="32" selection-start-column="85" selection-end-line="32" selection-end-column="85" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1952#1953#0" expanded="true" />
+            <element signature="e#1999#2000#0" expanded="true" />
+            <element signature="e#2067#2068#0" expanded="true" />
+            <element signature="e#2108#2109#0" expanded="true" />
+            <element signature="e#2171#2172#0" expanded="true" />
+            <element signature="e#2198#2199#0" expanded="true" />
+            <element signature="e#2270#2271#0" expanded="true" />
+            <element signature="e#2305#2306#0" expanded="true" />
+            <element signature="e#2374#2375#0" expanded="true" />
+            <element signature="e#2405#2406#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/octaveide/lexer/_OctaveLexer.flex">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.70247936">
+          <caret line="87" column="58" selection-start-line="87" selection-start-column="58" selection-end-line="87" selection-end-column="58" />
+          <folding>
+            <marker date="1456477151602" expanded="true" signature="37:191" placeholder="..." />
+            <marker date="1456477151602" expanded="false" signature="223:230" placeholder=" { " />
+            <marker date="1456477151602" expanded="false" signature="257:261" placeholder=" }" />
+            <marker date="1456477151602" expanded="true" signature="670:721" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="746:783" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="807:841" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="865:900" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="924:957" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="981:1021" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1046:1083" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1107:1144" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1168:1205" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1229:1266" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1290:1331" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1355:1397" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1421:1466" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1490:1532" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1556:1598" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1622:1664" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1688:1741" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1765:1815" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1839:1889" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1913:1963" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="1987:2034" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2058:2106" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2130:2164" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2188:2223" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2247:2282" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2306:2341" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2365:2400" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2424:2459" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2483:2521" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2545:2587" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2611:2650" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2674:2713" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2737:2776" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2800:2848" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2872:2911" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2935:2970" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="2994:3045" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3069:3111" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3135:3176" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3200:3241" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3265:3301" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3325:3367" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3391:3434" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3458:3501" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3525:3568" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3592:3635" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3659:3702" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3726:3772" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3796:3831" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3855:3890" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3914:3947" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="3971:4006" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="4030:4063" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="4087:4119" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="4143:4184" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="4208:4248" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="4272:4311" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="4300:4311" placeholder="{...}" />
+            <marker date="1456477151602" expanded="true" signature="4321:4354" placeholder="{...}" />
           </folding>
         </state>
       </provider>

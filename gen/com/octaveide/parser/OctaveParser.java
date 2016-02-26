@@ -113,11 +113,11 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   // '*'|'/'
   static boolean mul_op(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "mul_op")) return false;
-    if (!nextTokenIs(b, "", MULTIPLY, DIVIDE)) return false;
+    if (!nextTokenIs(b, "", MULTIPLY, L_DIV)) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, MULTIPLY);
-    if (!r) r = consumeToken(b, DIVIDE);
+    if (!r) r = consumeToken(b, L_DIV);
     exit_section_(b, m, null, r);
     return r;
   }

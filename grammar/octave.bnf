@@ -14,14 +14,65 @@
     psiImplUtilClass="com.octaveide.psi.impl.OctavePsiImplUtil"
 
     tokens = [
+        L_PAREN='('
+        R_PAREN=')'
+        L_BRACE='{'
+        R_BRACE='}'
+
+        ASSIGN_PLUS='+='
+        ASSIGN_MINUS='-='
+        ASSIGN_MULTIPLY='*='
+        ASSIGN_L_DIV='/='
+        ASSIGN_R_DIV='\='
+        ASSIGN_POW_1='^='
+        ASSIGN_ELEMENT_MULTIPLY='.*='
+        ASSIGN_ELEMENT_L_DIV='./='
+        ASSIGN_ELEMENT_R_DIV='.\='
+        ASSIGN_ELEMENT_POW_1='.^='
+        ASSIGN_ELEMENT_OR='|='
+        ASSIGN_ELEMENT_AND='&='
+
         PLUS='+'
         MINUS='-'
-        ASSIGN='='
+        L_DIV='/'
+        R_DIV='\'
+        POW_1='^' // POW_1 and POW_2 are synonymous
+        POW_2='**'
         MULTIPLY='*'
-        DIVIDE='/'
+        CC_TRANSPOSE="'" // Complex Conjugate transpose
+        TRANSPOSE=".'"
+        INCREMENT="++"
+        DECREMENT="--"
+
+        LESS_THAN_OR_EQUAL="<="
+        LESS_THAN="<"
+        EQUAL="=="
+        GREATER_THAN_OR_EQUAL=">="
+        GREATER_THAN=">"
+        NOT_EQUAL_1="!=" // NOT_EQUAL_1 and NOT_EQUAL_2 are synonymous
+        NOT_EQUAL_2="~="
+        ASSIGN='='
+
+        ELEMENT_PLUS='.+'
+        ELEMENT_MINUS='.-'
+        ELEMENT_L_DIV='./'
+        ELEMENT_R_DIV='.\'
+        ELEMENT_POW_1='.^'
+        ELEMENT_POW_2='.**'
+        ELEMENT_MULTIPLY='.*'
+
+        NOT_1="!" // NOT_1 and NOT_2 are synonymous
+        NOT_2="~"
+
+        DOT='.'
+        COLON=':'
+        AND='&&'
+        OR='||'
+        ELEMENT_AND='&'
+        ELEMENT_OR='|'
+
         SEMICOLON=';'
     ]
-
 //    extends("(add|minus)_expr") = binary_expr
     extends(".*expr")=expr
 //    consumeTokenMethod(".*_expr|expr")="consumeTokenFast"
