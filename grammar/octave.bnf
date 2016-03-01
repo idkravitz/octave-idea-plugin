@@ -98,12 +98,15 @@ expr ::= assign_expr
     | postfix_expr
     | primary_expr
 
-private primary_expr ::= literal_expr | identifier_expr // todo function call, array indexing, cell indexing and structure element indexing: "() {} ."
+private primary_expr ::= paren_expr | literal_expr | identifier_expr // todo function call, array indexing, cell indexing and structure element indexing: "() {} ."
 private transpose_exponentiation_group ::= transpose_expr | exponent_expr
 identifier_expr ::= identifier
 literal_expr ::= int | float
 
-assign_expr ::= expr assign_op expr { rightAssociative = true }
+assign_expr ::= expr assign_op expr {
+    pin = 2
+    rightAssociative = true
+}
 mul_expr ::= expr mul_op expr
 add_expr ::= expr add_op expr
 unary_expr ::= unary_op expr
@@ -116,6 +119,7 @@ colon_expr ::= expr ':' expr
 transpose_expr ::= expr transpose_op
 exponent_expr ::= expr exponent_op expr
 postfix_expr ::= expr postfix_op { rightAssociative = true }
+paren_expr ::= '(' expr ')' { pin=1 }
 
 private postfix_op ::= '++' | '--'
 private exponent_op ::= '^' | '**' | '.^' | '.**'

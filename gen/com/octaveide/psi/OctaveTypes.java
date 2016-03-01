@@ -20,6 +20,7 @@ public interface OctaveTypes {
   IElementType LITERAL_EXPR = new OctaveElementType("LITERAL_EXPR");
   IElementType MUL_EXPR = new OctaveElementType("MUL_EXPR");
   IElementType OR_EXPR = new OctaveElementType("OR_EXPR");
+  IElementType PAREN_EXPR = new OctaveElementType("PAREN_EXPR");
   IElementType POSTFIX_EXPR = new OctaveElementType("POSTFIX_EXPR");
   IElementType RELATIONAL_EXPR = new OctaveElementType("RELATIONAL_EXPR");
   IElementType STATEMENT = new OctaveElementType("STATEMENT");
@@ -121,6 +122,9 @@ public interface OctaveTypes {
       }
       else if (type == OR_EXPR) {
         return new OctaveOrExprImpl(node);
+      }
+      else if (type == PAREN_EXPR) {
+        return new OctaveParenExprImpl(node);
       }
       else if (type == POSTFIX_EXPR) {
         return new OctavePostfixExprImpl(node);

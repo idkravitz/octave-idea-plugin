@@ -59,6 +59,9 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     else if (t == OR_EXPR) {
       r = expr(b, 0, 0);
     }
+    else if (t == PAREN_EXPR) {
+      r = paren_expr(b, 0);
+    }
     else if (t == POSTFIX_EXPR) {
       r = expr(b, 0, 10);
     }
@@ -88,7 +91,8 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     create_token_set_(ADD_EXPR, AND_EXPR, ASSIGN_EXPR, COLON_EXPR,
       ELEMENT_AND_EXPR, ELEMENT_OR_EXPR, EXPONENT_EXPR, EXPR,
       IDENTIFIER_EXPR, LITERAL_EXPR, MUL_EXPR, OR_EXPR,
-      POSTFIX_EXPR, RELATIONAL_EXPR, TRANSPOSE_EXPR, UNARY_EXPR),
+      PAREN_EXPR, POSTFIX_EXPR, RELATIONAL_EXPR, TRANSPOSE_EXPR,
+      UNARY_EXPR),
   };
 
   /* ********************************************************** */
@@ -302,13 +306,14 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   // 9: PREFIX(unary_expr)
   // 10: POSTFIX(transpose_expr) BINARY(exponent_expr)
   // 11: POSTFIX(postfix_expr)
-  // 12: ATOM(literal_expr) ATOM(identifier_expr)
+  // 12: ATOM(paren_expr) ATOM(literal_expr) ATOM(identifier_expr)
   public static boolean expr(PsiBuilder b, int l, int g) {
     if (!recursion_guard_(b, l, "expr")) return false;
     addVariant(b, "<expr>");
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, "<expr>");
     r = unary_expr(b, l + 1);
+    if (!r) r = paren_expr(b, l + 1);
     if (!r) r = literal_expr(b, l + 1);
     if (!r) r = identifier_expr(b, l + 1);
     p = r;
@@ -386,6 +391,20 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     p = r;
     r = p && expr(b, l, 9);
     exit_section_(b, l, m, UNARY_EXPR, r, p, null);
+    return r || p;
+  }
+
+  // '(' expr ')'
+  public static boolean paren_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "paren_expr")) return false;
+    if (!nextTokenIsFast(b, L_PAREN)) return false;
+    boolean r, p;
+    Marker m = enter_section_(b, l, _NONE_, null);
+    r = consumeTokenSmart(b, L_PAREN);
+    p = r; // pin = 1
+    r = r && report_error_(b, expr(b, l + 1, -1));
+    r = p && consumeToken(b, R_PAREN) && r;
+    exit_section_(b, l, m, PAREN_EXPR, r, p, null);
     return r || p;
   }
 
