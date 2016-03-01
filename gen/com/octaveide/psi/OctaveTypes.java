@@ -9,12 +9,21 @@ import com.octaveide.psi.impl.*;
 public interface OctaveTypes {
 
   IElementType ADD_EXPR = new OctaveElementType("ADD_EXPR");
+  IElementType AND_EXPR = new OctaveElementType("AND_EXPR");
   IElementType ASSIGN_EXPR = new OctaveElementType("ASSIGN_EXPR");
+  IElementType COLON_EXPR = new OctaveElementType("COLON_EXPR");
+  IElementType ELEMENT_AND_EXPR = new OctaveElementType("ELEMENT_AND_EXPR");
+  IElementType ELEMENT_OR_EXPR = new OctaveElementType("ELEMENT_OR_EXPR");
+  IElementType EXPONENT_EXPR = new OctaveElementType("EXPONENT_EXPR");
   IElementType EXPR = new OctaveElementType("EXPR");
   IElementType IDENTIFIER_EXPR = new OctaveElementType("IDENTIFIER_EXPR");
   IElementType LITERAL_EXPR = new OctaveElementType("LITERAL_EXPR");
   IElementType MUL_EXPR = new OctaveElementType("MUL_EXPR");
+  IElementType OR_EXPR = new OctaveElementType("OR_EXPR");
+  IElementType POSTFIX_EXPR = new OctaveElementType("POSTFIX_EXPR");
+  IElementType RELATIONAL_EXPR = new OctaveElementType("RELATIONAL_EXPR");
   IElementType STATEMENT = new OctaveElementType("STATEMENT");
+  IElementType TRANSPOSE_EXPR = new OctaveElementType("TRANSPOSE_EXPR");
   IElementType UNARY_EXPR = new OctaveElementType("UNARY_EXPR");
 
   IElementType AND = new OctaveTokenType("&&");
@@ -80,8 +89,23 @@ public interface OctaveTypes {
        if (type == ADD_EXPR) {
         return new OctaveAddExprImpl(node);
       }
+      else if (type == AND_EXPR) {
+        return new OctaveAndExprImpl(node);
+      }
       else if (type == ASSIGN_EXPR) {
         return new OctaveAssignExprImpl(node);
+      }
+      else if (type == COLON_EXPR) {
+        return new OctaveColonExprImpl(node);
+      }
+      else if (type == ELEMENT_AND_EXPR) {
+        return new OctaveElementAndExprImpl(node);
+      }
+      else if (type == ELEMENT_OR_EXPR) {
+        return new OctaveElementOrExprImpl(node);
+      }
+      else if (type == EXPONENT_EXPR) {
+        return new OctaveExponentExprImpl(node);
       }
       else if (type == EXPR) {
         return new OctaveExprImpl(node);
@@ -95,8 +119,20 @@ public interface OctaveTypes {
       else if (type == MUL_EXPR) {
         return new OctaveMulExprImpl(node);
       }
+      else if (type == OR_EXPR) {
+        return new OctaveOrExprImpl(node);
+      }
+      else if (type == POSTFIX_EXPR) {
+        return new OctavePostfixExprImpl(node);
+      }
+      else if (type == RELATIONAL_EXPR) {
+        return new OctaveRelationalExprImpl(node);
+      }
       else if (type == STATEMENT) {
         return new OctaveStatementImpl(node);
+      }
+      else if (type == TRANSPOSE_EXPR) {
+        return new OctaveTransposeExprImpl(node);
       }
       else if (type == UNARY_EXPR) {
         return new OctaveUnaryExprImpl(node);

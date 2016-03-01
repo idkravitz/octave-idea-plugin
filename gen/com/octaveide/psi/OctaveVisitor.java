@@ -11,7 +11,27 @@ public class OctaveVisitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitAndExpr(@NotNull OctaveAndExpr o) {
+    visitExpr(o);
+  }
+
   public void visitAssignExpr(@NotNull OctaveAssignExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitColonExpr(@NotNull OctaveColonExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitElementAndExpr(@NotNull OctaveElementAndExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitElementOrExpr(@NotNull OctaveElementOrExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitExponentExpr(@NotNull OctaveExponentExpr o) {
     visitExpr(o);
   }
 
@@ -31,8 +51,24 @@ public class OctaveVisitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitOrExpr(@NotNull OctaveOrExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitPostfixExpr(@NotNull OctavePostfixExpr o) {
+    visitExpr(o);
+  }
+
+  public void visitRelationalExpr(@NotNull OctaveRelationalExpr o) {
+    visitExpr(o);
+  }
+
   public void visitStatement(@NotNull OctaveStatement o) {
     visitPsiElement(o);
+  }
+
+  public void visitTransposeExpr(@NotNull OctaveTransposeExpr o) {
+    visitExpr(o);
   }
 
   public void visitUnaryExpr(@NotNull OctaveUnaryExpr o) {

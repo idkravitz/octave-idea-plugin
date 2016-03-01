@@ -22,13 +22,7 @@ public class OctaveSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey NUMBER = createTextAttributesKey("OCTAVE_NUMBER", DefaultLanguageHighlighterColors.NUMBER);
     public static final TextAttributesKey COMMENT = createTextAttributesKey("OCTAVE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
     public static final TextAttributesKey BAD_CHARACTER = createTextAttributesKey("OCTAVE_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
-
-//    private static final TextAttributesKey[] BAD_CHAR_KEYS = new TextAttributesKey[]{BAD_CHARACTER};
-//    private static final TextAttributesKey[] SEMICOLON_KEYS = new TextAttributesKey[]{SEMICOLON};
-//    private static final TextAttributesKey[] OPERATOR_KEYS = new TextAttributesKey[]{OPERATOR};
-//    private static final TextAttributesKey[] NUMBER_KEYS = new TextAttributesKey[]{NUMBER};
-//    private static final TextAttributesKey[] COMMENT_KEYS = new TextAttributesKey[]{COMMENT};
-//    private static final TextAttributesKey[] EMPTY_KEYS = new TextAttributesKey[0];
+    public static final TextAttributesKey IDENTIFIER = createTextAttributesKey("OCTAVE_IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER);
 
     private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
 
@@ -38,6 +32,7 @@ public class OctaveSyntaxHighlighter extends SyntaxHighlighterBase {
         fillMap(ATTRIBUTES, OctaveParserDefinition.NUMBERS, NUMBER);
         fillMap(ATTRIBUTES, SEMICOLON, OctaveTypes.SEMICOLON);
         fillMap(ATTRIBUTES, BAD_CHARACTER, TokenType.BAD_CHARACTER);
+        fillMap(ATTRIBUTES, IDENTIFIER, OctaveTypes.IDENTIFIER);
     }
 
 

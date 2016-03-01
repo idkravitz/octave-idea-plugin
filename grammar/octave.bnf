@@ -85,23 +85,47 @@ statement ::= expr (';'|CRLF|<<eof>>)
 
 // the root expression rule
 expr ::= assign_expr
+    | or_expr
+    | and_expr
+    | element_or_expr
+    | element_and_expr
+    | relational_expr
+    | colon_expr
     | add_expr
     | mul_expr
     | unary_expr
+    | transpose_exponentiation_group
+    | postfix_expr
     | primary_expr
 
-private primary_expr ::= literal_expr | identifier_expr
+private primary_expr ::= literal_expr | identifier_expr // todo function call, array indexing, cell indexing and structure element indexing: "() {} ."
+private transpose_exponentiation_group ::= transpose_expr | exponent_expr
 identifier_expr ::= identifier
 literal_expr ::= int | float
 
-assign_expr ::= expr '=' expr
+assign_expr ::= expr assign_op expr { rightAssociative = true }
 mul_expr ::= expr mul_op expr
 add_expr ::= expr add_op expr
 unary_expr ::= unary_op expr
+or_expr ::= expr '||' expr
+and_expr ::= expr '&&' expr
+element_or_expr ::= expr '|' expr
+element_and_expr ::= expr '&' expr
+relational_expr ::= expr relational_op expr
+colon_expr ::= expr ':' expr
+transpose_expr ::= expr transpose_op
+exponent_expr ::= expr exponent_op expr
+postfix_expr ::= expr postfix_op { rightAssociative = true }
 
-private unary_op ::= '+'|'-'
+private postfix_op ::= '++' | '--'
+private exponent_op ::= '^' | '**' | '.^' | '.**'
+private transpose_op ::= "'" | ".'"
+private unary_op ::= '+' | '-' | '++' | '--' | '~' | '!'
 private add_op ::= '+'|'-'
-private mul_op ::= '*'|'/'
+private mul_op ::= '*' | '/' | '\' | '.\' | '.*' | './'
+private assign_op ::= '=' | '+=' | '-=' | '*=' | '/=' | '\=' | '^=' | '.*=' | './=' | '.\=' | '.^=' | '|=' | '&='
+private relational_op ::= '<' | '<=' | '==' | '>=' | '>' | '!=' | '~='
+
 
 //fake binary_expr ::= expr+ {
 //    methods=[
