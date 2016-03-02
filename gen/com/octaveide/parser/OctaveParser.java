@@ -56,6 +56,9 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     else if (t == FUNC_CALL_EXPR) {
       r = func_call_expr(b, 0);
     }
+    else if (t == FUNC_DECL_STATEMENT) {
+      r = func_decl_statement(b, 0);
+    }
     else if (t == IDENTIFIER_EXPR) {
       r = identifier_expr(b, 0);
     }
@@ -97,7 +100,7 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   }
 
   public static final TokenSet[] EXTENDS_SETS_ = new TokenSet[] {
-    create_token_set_(EXPR_STATEMENT, FOR_LOOP_STATEMENT, STATEMENT),
+    create_token_set_(EXPR_STATEMENT, FOR_LOOP_STATEMENT, FUNC_DECL_STATEMENT, STATEMENT),
     create_token_set_(ADD_EXPR, AND_EXPR, ASSIGN_EXPR, COLON_EXPR,
       ELEMENT_AND_EXPR, ELEMENT_OR_EXPR, EXPONENT_EXPR, EXPR,
       FUNC_CALL_EXPR, IDENTIFIER_EXPR, LITERAL_EXPR, MUL_EXPR,
@@ -114,6 +117,30 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b);
     r = consumeToken(b, PLUS);
     if (!r) r = consumeToken(b, MINUS);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // identifier (',' identifier)
+  static boolean arg_list(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "arg_list")) return false;
+    if (!nextTokenIs(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, IDENTIFIER);
+    r = r && arg_list_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ',' identifier
+  private static boolean arg_list_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "arg_list_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, COMMA);
+    r = r && consumeToken(b, IDENTIFIER);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -225,6 +252,91 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // function (retval '=')? identifier ( '(' arg_list? ')' )? terminator statement* (endfunction|end)
+  public static boolean func_decl_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_decl_statement")) return false;
+    if (!nextTokenIs(b, FUNCTION)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, FUNCTION);
+    r = r && func_decl_statement_1(b, l + 1);
+    r = r && consumeToken(b, IDENTIFIER);
+    r = r && func_decl_statement_3(b, l + 1);
+    r = r && terminator(b, l + 1);
+    r = r && func_decl_statement_5(b, l + 1);
+    r = r && func_decl_statement_6(b, l + 1);
+    exit_section_(b, m, FUNC_DECL_STATEMENT, r);
+    return r;
+  }
+
+  // (retval '=')?
+  private static boolean func_decl_statement_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_decl_statement_1")) return false;
+    func_decl_statement_1_0(b, l + 1);
+    return true;
+  }
+
+  // retval '='
+  private static boolean func_decl_statement_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_decl_statement_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = retval(b, l + 1);
+    r = r && consumeToken(b, ASSIGN);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // ( '(' arg_list? ')' )?
+  private static boolean func_decl_statement_3(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_decl_statement_3")) return false;
+    func_decl_statement_3_0(b, l + 1);
+    return true;
+  }
+
+  // '(' arg_list? ')'
+  private static boolean func_decl_statement_3_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_decl_statement_3_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, L_PAREN);
+    r = r && func_decl_statement_3_0_1(b, l + 1);
+    r = r && consumeToken(b, R_PAREN);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // arg_list?
+  private static boolean func_decl_statement_3_0_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_decl_statement_3_0_1")) return false;
+    arg_list(b, l + 1);
+    return true;
+  }
+
+  // statement*
+  private static boolean func_decl_statement_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_decl_statement_5")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!statement(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "func_decl_statement_5", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
+  // endfunction|end
+  private static boolean func_decl_statement_6(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_decl_statement_6")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ENDFUNCTION);
+    if (!r) r = consumeToken(b, END);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // !<<eof>> statement
   static boolean item_(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "item_")) return false;
@@ -304,7 +416,7 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     if (!recursion_guard_(b, l, "param_list_1_0")) return false;
     boolean r;
     Marker m = enter_section_(b);
-    r = consumeToken(b, ",");
+    r = consumeToken(b, COMMA);
     r = r && expr(b, l + 1, -1);
     exit_section_(b, m, null, r);
     return r;
@@ -341,7 +453,14 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // identifier
+  static boolean retval(PsiBuilder b, int l) {
+    return consumeToken(b, IDENTIFIER);
+  }
+
+  /* ********************************************************** */
   // expr_statement
+  //     | func_decl_statement
   //     | for_loop_statement
   //     | empty_statement
   public static boolean statement(PsiBuilder b, int l) {
@@ -349,6 +468,7 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     boolean r;
     Marker m = enter_section_(b, l, _COLLAPSE_, "<statement>");
     r = expr_statement(b, l + 1);
+    if (!r) r = func_decl_statement(b, l + 1);
     if (!r) r = for_loop_statement(b, l + 1);
     if (!r) r = empty_statement(b, l + 1);
     exit_section_(b, l, m, STATEMENT, r, false, null);

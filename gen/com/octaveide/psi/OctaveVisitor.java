@@ -51,6 +51,10 @@ public class OctaveVisitor extends PsiElementVisitor {
     visitExpr(o);
   }
 
+  public void visitFuncDeclStatement(@NotNull OctaveFuncDeclStatement o) {
+    visitStatement(o);
+  }
+
   public void visitIdentifierExpr(@NotNull OctaveIdentifierExpr o) {
     visitExpr(o);
   }

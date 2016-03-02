@@ -19,6 +19,7 @@ public interface OctaveTypes {
   IElementType EXPR_STATEMENT = new OctaveElementType("EXPR_STATEMENT");
   IElementType FOR_LOOP_STATEMENT = new OctaveElementType("FOR_LOOP_STATEMENT");
   IElementType FUNC_CALL_EXPR = new OctaveElementType("FUNC_CALL_EXPR");
+  IElementType FUNC_DECL_STATEMENT = new OctaveElementType("FUNC_DECL_STATEMENT");
   IElementType IDENTIFIER_EXPR = new OctaveElementType("IDENTIFIER_EXPR");
   IElementType LITERAL_EXPR = new OctaveElementType("LITERAL_EXPR");
   IElementType MUL_EXPR = new OctaveElementType("MUL_EXPR");
@@ -46,6 +47,7 @@ public interface OctaveTypes {
   IElementType ASSIGN_R_DIV = new OctaveTokenType("\\=");
   IElementType CC_TRANSPOSE = new OctaveTokenType("'");
   IElementType COLON = new OctaveTokenType(":");
+  IElementType COMMA = new OctaveTokenType(",");
   IElementType COMMENT = new OctaveTokenType("COMMENT");
   IElementType CRLF = new OctaveTokenType("CRLF");
   IElementType DECREMENT = new OctaveTokenType("--");
@@ -61,9 +63,11 @@ public interface OctaveTypes {
   IElementType ELEMENT_R_DIV = new OctaveTokenType(".\\");
   IElementType END = new OctaveTokenType("end");
   IElementType ENDFOR = new OctaveTokenType("endfor");
+  IElementType ENDFUNCTION = new OctaveTokenType("endfunction");
   IElementType EQUAL = new OctaveTokenType("==");
   IElementType FLOAT = new OctaveTokenType("float");
   IElementType FOR = new OctaveTokenType("for");
+  IElementType FUNCTION = new OctaveTokenType("function");
   IElementType GREATER_THAN = new OctaveTokenType(">");
   IElementType GREATER_THAN_OR_EQUAL = new OctaveTokenType(">=");
   IElementType IDENTIFIER = new OctaveTokenType("identifier");
@@ -125,6 +129,9 @@ public interface OctaveTypes {
       }
       else if (type == FUNC_CALL_EXPR) {
         return new OctaveFuncCallExprImpl(node);
+      }
+      else if (type == FUNC_DECL_STATEMENT) {
+        return new OctaveFuncDeclStatementImpl(node);
       }
       else if (type == IDENTIFIER_EXPR) {
         return new OctaveIdentifierExprImpl(node);

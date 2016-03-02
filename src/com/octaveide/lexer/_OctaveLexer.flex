@@ -95,9 +95,12 @@ IDENTIFIER = {LETTER} ({LETTER}|{DIGIT})*
   "&"                { return ELEMENT_AND; }
   "|"                { return ELEMENT_OR; }
   ";"                { return SEMICOLON; }
+  ","                { return COMMA; }
   "for"              { return FOR; }
   "end"              { return END; }
   "endfor"           { return ENDFOR; }
+  "function"         { return FUNCTION; }
+  "endfunction"      { return ENDFUNCTION; }
 
   {IDENTIFIER}       { return IDENTIFIER; }
 
