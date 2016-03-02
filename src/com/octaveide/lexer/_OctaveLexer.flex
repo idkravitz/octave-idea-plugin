@@ -29,70 +29,78 @@ COMMENT=("#"|"%")[^\r\n]*
 INT = (0|[1-9][0-9]*)
 FLOAT = [0-9]+ [eE] [+-]? [0-9]+
 //FLOAT = {INT}?.{INT} | {INT} ["eE"] ["+-"]? {INT}
-IDENTIFIER = [:jletter:] ([:jletter:]|[:jdigit:])*
+LETTER = [:letter:] | "_"
+DIGIT =  [:digit:]
+
+IDENTIFIER = {LETTER} ({LETTER}|{DIGIT})*
 
 
 %%
 <YYINITIAL> {
-  {WHITE_SPACE}      { yybegin(YYINITIAL); return TokenType.WHITE_SPACE; }
+  {WHITE_SPACE}      { return TokenType.WHITE_SPACE; }
 
-  {COMMENT}          { yybegin(YYINITIAL); return COMMENT; }
-  {CRLF}             { yybegin(YYINITIAL); return CRLF; }
-  {FLOAT}            { yybegin(YYINITIAL); return FLOAT; }
-  {INT}              { yybegin(YYINITIAL); return INT; }
-  {IDENTIFIER}       { yybegin(YYINITIAL); return IDENTIFIER; }
+  {COMMENT}          { return COMMENT; }
+  {CRLF}             { return CRLF; }
+  {FLOAT}            { return FLOAT; }
+  {INT}              { return INT; }
 
-  "("                { yybegin(YYINITIAL); return L_PAREN; }
-  ")"                { yybegin(YYINITIAL); return R_PAREN; }
-  "{"                { yybegin(YYINITIAL); return L_BRACE; }
-  "}"                { yybegin(YYINITIAL); return R_BRACE; }
-  "+="               { yybegin(YYINITIAL); return ASSIGN_PLUS; }
-  "-="               { yybegin(YYINITIAL); return ASSIGN_MINUS; }
-  "*="               { yybegin(YYINITIAL); return ASSIGN_MULTIPLY; }
-  "/="               { yybegin(YYINITIAL); return ASSIGN_L_DIV; }
-  "\\="              { yybegin(YYINITIAL); return ASSIGN_R_DIV; }
-  "^="               { yybegin(YYINITIAL); return ASSIGN_POW_1; }
-  ".*="              { yybegin(YYINITIAL); return ASSIGN_ELEMENT_MULTIPLY; }
-  "./="              { yybegin(YYINITIAL); return ASSIGN_ELEMENT_L_DIV; }
-  ".\\="             { yybegin(YYINITIAL); return ASSIGN_ELEMENT_R_DIV; }
-  ".^="              { yybegin(YYINITIAL); return ASSIGN_ELEMENT_POW_1; }
-  "|="               { yybegin(YYINITIAL); return ASSIGN_ELEMENT_OR; }
-  "&="               { yybegin(YYINITIAL); return ASSIGN_ELEMENT_AND; }
-  "+"                { yybegin(YYINITIAL); return PLUS; }
-  "-"                { yybegin(YYINITIAL); return MINUS; }
-  "/"                { yybegin(YYINITIAL); return L_DIV; }
-  "\\"               { yybegin(YYINITIAL); return R_DIV; }
-  "^"                { yybegin(YYINITIAL); return POW_1; }
-  "**"               { yybegin(YYINITIAL); return POW_2; }
-  "*"                { yybegin(YYINITIAL); return MULTIPLY; }
-  "'"                { yybegin(YYINITIAL); return CC_TRANSPOSE; }
-  ".'"               { yybegin(YYINITIAL); return TRANSPOSE; }
-  "++"               { yybegin(YYINITIAL); return INCREMENT; }
-  "--"               { yybegin(YYINITIAL); return DECREMENT; }
-  "<="               { yybegin(YYINITIAL); return LESS_THAN_OR_EQUAL; }
-  "<"                { yybegin(YYINITIAL); return LESS_THAN; }
-  "=="               { yybegin(YYINITIAL); return EQUAL; }
-  ">="               { yybegin(YYINITIAL); return GREATER_THAN_OR_EQUAL; }
-  ">"                { yybegin(YYINITIAL); return GREATER_THAN; }
-  "!="               { yybegin(YYINITIAL); return NOT_EQUAL_1; }
-  "~="               { yybegin(YYINITIAL); return NOT_EQUAL_2; }
-  "="                { yybegin(YYINITIAL); return ASSIGN; }
-  ".+"               { yybegin(YYINITIAL); return ELEMENT_PLUS; }
-  ".-"               { yybegin(YYINITIAL); return ELEMENT_MINUS; }
-  "./"               { yybegin(YYINITIAL); return ELEMENT_L_DIV; }
-  ".\\"              { yybegin(YYINITIAL); return ELEMENT_R_DIV; }
-  ".^"               { yybegin(YYINITIAL); return ELEMENT_POW_1; }
-  ".**"              { yybegin(YYINITIAL); return ELEMENT_POW_2; }
-  ".*"               { yybegin(YYINITIAL); return ELEMENT_MULTIPLY; }
-  "!"                { yybegin(YYINITIAL); return NOT_1; }
-  "~"                { yybegin(YYINITIAL); return NOT_2; }
-  "."                { yybegin(YYINITIAL); return DOT; }
-  ":"                { yybegin(YYINITIAL); return COLON; }
-  "&&"               { yybegin(YYINITIAL); return AND; }
-  "||"               { yybegin(YYINITIAL); return OR; }
-  "&"                { yybegin(YYINITIAL); return ELEMENT_AND; }
-  "|"                { yybegin(YYINITIAL); return ELEMENT_OR; }
-  ";"                { yybegin(YYINITIAL); return SEMICOLON; }
+  "("                { return L_PAREN; }
+  ")"                { return R_PAREN; }
+  "{"                { return L_BRACE; }
+  "}"                { return R_BRACE; }
+  "+="               { return ASSIGN_PLUS; }
+  "-="               { return ASSIGN_MINUS; }
+  "*="               { return ASSIGN_MULTIPLY; }
+  "/="               { return ASSIGN_L_DIV; }
+  "\\="              { return ASSIGN_R_DIV; }
+  "^="               { return ASSIGN_POW_1; }
+  ".*="              { return ASSIGN_ELEMENT_MULTIPLY; }
+  "./="              { return ASSIGN_ELEMENT_L_DIV; }
+  ".\\="             { return ASSIGN_ELEMENT_R_DIV; }
+  ".^="              { return ASSIGN_ELEMENT_POW_1; }
+  "|="               { return ASSIGN_ELEMENT_OR; }
+  "&="               { return ASSIGN_ELEMENT_AND; }
+  "+"                { return PLUS; }
+  "-"                { return MINUS; }
+  "/"                { return L_DIV; }
+  "\\"               { return R_DIV; }
+  "^"                { return POW_1; }
+  "**"               { return POW_2; }
+  "*"                { return MULTIPLY; }
+  "'"                { return CC_TRANSPOSE; }
+  ".'"               { return TRANSPOSE; }
+  "++"               { return INCREMENT; }
+  "--"               { return DECREMENT; }
+  "<="               { return LESS_THAN_OR_EQUAL; }
+  "<"                { return LESS_THAN; }
+  "=="               { return EQUAL; }
+  ">="               { return GREATER_THAN_OR_EQUAL; }
+  ">"                { return GREATER_THAN; }
+  "!="               { return NOT_EQUAL_1; }
+  "~="               { return NOT_EQUAL_2; }
+  "="                { return ASSIGN; }
+  ".+"               { return ELEMENT_PLUS; }
+  ".-"               { return ELEMENT_MINUS; }
+  "./"               { return ELEMENT_L_DIV; }
+  ".\\"              { return ELEMENT_R_DIV; }
+  ".^"               { return ELEMENT_POW_1; }
+  ".**"              { return ELEMENT_POW_2; }
+  ".*"               { return ELEMENT_MULTIPLY; }
+  "!"                { return NOT_1; }
+  "~"                { return NOT_2; }
+  "."                { return DOT; }
+  ":"                { return COLON; }
+  "&&"               { return AND; }
+  "||"               { return OR; }
+  "&"                { return ELEMENT_AND; }
+  "|"                { return ELEMENT_OR; }
+  ";"                { return SEMICOLON; }
+  "for"              { return FOR; }
+  "end"              { return END; }
+  "endfor"           { return ENDFOR; }
+
+  {IDENTIFIER}       { return IDENTIFIER; }
+
 
   [^] { return TokenType.BAD_CHARACTER; }
 }

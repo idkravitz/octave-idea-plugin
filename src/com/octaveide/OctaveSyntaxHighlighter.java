@@ -23,6 +23,7 @@ public class OctaveSyntaxHighlighter extends SyntaxHighlighterBase {
     public static final TextAttributesKey COMMENT = createTextAttributesKey("OCTAVE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
     public static final TextAttributesKey BAD_CHARACTER = createTextAttributesKey("OCTAVE_BAD_CHARACTER", HighlighterColors.BAD_CHARACTER);
     public static final TextAttributesKey IDENTIFIER = createTextAttributesKey("OCTAVE_IDENTIFIER", DefaultLanguageHighlighterColors.IDENTIFIER);
+    public static final TextAttributesKey KEYWORD = createTextAttributesKey("OCTAVE_KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
 
     private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
 
@@ -33,6 +34,7 @@ public class OctaveSyntaxHighlighter extends SyntaxHighlighterBase {
         fillMap(ATTRIBUTES, SEMICOLON, OctaveTypes.SEMICOLON);
         fillMap(ATTRIBUTES, BAD_CHARACTER, TokenType.BAD_CHARACTER);
         fillMap(ATTRIBUTES, IDENTIFIER, OctaveTypes.IDENTIFIER);
+        fillMap(ATTRIBUTES, OctaveParserDefinition.KEYWORDS, KEYWORD);
     }
 
 

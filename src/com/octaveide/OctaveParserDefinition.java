@@ -29,6 +29,7 @@ public class OctaveParserDefinition implements ParserDefinition {
             GREATER_THAN_OR_EQUAL, INCREMENT, LESS_THAN, LESS_THAN_OR_EQUAL, L_BRACE, L_DIV, L_PAREN, MINUS, MULTIPLY,
             NOT_1, NOT_2, NOT_EQUAL_1, NOT_EQUAL_2, OR, PLUS, POW_1, POW_2, R_BRACE, R_DIV, R_PAREN, TRANSPOSE);
     public static final TokenSet NUMBERS = TokenSet.create(INT, FLOAT);
+    public static final TokenSet KEYWORDS = TokenSet.create(END, ENDFOR, FOR);
 
     public static final IFileElementType FILE = new IFileElementType(Language.<OctaveLanguage>findInstance(OctaveLanguage.class));
 

@@ -16,6 +16,9 @@ public interface OctaveTypes {
   IElementType ELEMENT_OR_EXPR = new OctaveElementType("ELEMENT_OR_EXPR");
   IElementType EXPONENT_EXPR = new OctaveElementType("EXPONENT_EXPR");
   IElementType EXPR = new OctaveElementType("EXPR");
+  IElementType EXPR_STATEMENT = new OctaveElementType("EXPR_STATEMENT");
+  IElementType FOR_LOOP_STATEMENT = new OctaveElementType("FOR_LOOP_STATEMENT");
+  IElementType FUNC_CALL_EXPR = new OctaveElementType("FUNC_CALL_EXPR");
   IElementType IDENTIFIER_EXPR = new OctaveElementType("IDENTIFIER_EXPR");
   IElementType LITERAL_EXPR = new OctaveElementType("LITERAL_EXPR");
   IElementType MUL_EXPR = new OctaveElementType("MUL_EXPR");
@@ -56,8 +59,11 @@ public interface OctaveTypes {
   IElementType ELEMENT_POW_1 = new OctaveTokenType(".^");
   IElementType ELEMENT_POW_2 = new OctaveTokenType(".**");
   IElementType ELEMENT_R_DIV = new OctaveTokenType(".\\");
+  IElementType END = new OctaveTokenType("end");
+  IElementType ENDFOR = new OctaveTokenType("endfor");
   IElementType EQUAL = new OctaveTokenType("==");
   IElementType FLOAT = new OctaveTokenType("float");
+  IElementType FOR = new OctaveTokenType("for");
   IElementType GREATER_THAN = new OctaveTokenType(">");
   IElementType GREATER_THAN_OR_EQUAL = new OctaveTokenType(">=");
   IElementType IDENTIFIER = new OctaveTokenType("identifier");
@@ -110,6 +116,15 @@ public interface OctaveTypes {
       }
       else if (type == EXPR) {
         return new OctaveExprImpl(node);
+      }
+      else if (type == EXPR_STATEMENT) {
+        return new OctaveExprStatementImpl(node);
+      }
+      else if (type == FOR_LOOP_STATEMENT) {
+        return new OctaveForLoopStatementImpl(node);
+      }
+      else if (type == FUNC_CALL_EXPR) {
+        return new OctaveFuncCallExprImpl(node);
       }
       else if (type == IDENTIFIER_EXPR) {
         return new OctaveIdentifierExprImpl(node);

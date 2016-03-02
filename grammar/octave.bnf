@@ -75,13 +75,20 @@
     ]
 //    extends("(add|minus)_expr") = binary_expr
     extends(".*expr")=expr
+    extends(".*statement")=statement
 //    consumeTokenMethod(".*_expr|expr")="consumeTokenFast"
 }
 
 octaveFile ::= item_*
-private item_ ::= !<<eof>> (statement|CRLF|COMMENT)
+private item_ ::= !<<eof>> statement
 
-statement ::= expr (';'|CRLF|<<eof>>)
+statement ::= expr_statement
+    | for_loop_statement
+    | empty_statement
+expr_statement ::= expr (terminator|<<eof>>)
+private terminator ::= ';'|CRLF|COMMENT
+for_loop_statement ::= for identifier '=' expr terminator statement* (endfor|end)
+private  empty_statement ::= terminator
 
 // the root expression rule
 expr ::= assign_expr
@@ -98,10 +105,13 @@ expr ::= assign_expr
     | postfix_expr
     | primary_expr
 
-private primary_expr ::= paren_expr | literal_expr | identifier_expr // todo function call, array indexing, cell indexing and structure element indexing: "() {} ."
+private primary_expr ::= func_call_expr | paren_expr | literal_expr | identifier_expr // todo function call, array indexing, cell indexing and structure element indexing: "() {} ."
 private transpose_exponentiation_group ::= transpose_expr | exponent_expr
 identifier_expr ::= identifier
 literal_expr ::= int | float
+
+func_call_expr ::= identifier '(' param_list? ')'
+private param_list ::= expr (',' expr)*
 
 assign_expr ::= expr assign_op expr {
     pin = 2

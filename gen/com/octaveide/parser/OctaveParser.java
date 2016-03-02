@@ -47,6 +47,15 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     else if (t == EXPR) {
       r = expr(b, 0, -1);
     }
+    else if (t == EXPR_STATEMENT) {
+      r = expr_statement(b, 0);
+    }
+    else if (t == FOR_LOOP_STATEMENT) {
+      r = for_loop_statement(b, 0);
+    }
+    else if (t == FUNC_CALL_EXPR) {
+      r = func_call_expr(b, 0);
+    }
     else if (t == IDENTIFIER_EXPR) {
       r = identifier_expr(b, 0);
     }
@@ -88,11 +97,12 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   }
 
   public static final TokenSet[] EXTENDS_SETS_ = new TokenSet[] {
+    create_token_set_(EXPR_STATEMENT, FOR_LOOP_STATEMENT, STATEMENT),
     create_token_set_(ADD_EXPR, AND_EXPR, ASSIGN_EXPR, COLON_EXPR,
       ELEMENT_AND_EXPR, ELEMENT_OR_EXPR, EXPONENT_EXPR, EXPR,
-      IDENTIFIER_EXPR, LITERAL_EXPR, MUL_EXPR, OR_EXPR,
-      PAREN_EXPR, POSTFIX_EXPR, RELATIONAL_EXPR, TRANSPOSE_EXPR,
-      UNARY_EXPR),
+      FUNC_CALL_EXPR, IDENTIFIER_EXPR, LITERAL_EXPR, MUL_EXPR,
+      OR_EXPR, PAREN_EXPR, POSTFIX_EXPR, RELATIONAL_EXPR,
+      TRANSPOSE_EXPR, UNARY_EXPR),
   };
 
   /* ********************************************************** */
@@ -132,6 +142,12 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // terminator
+  static boolean empty_statement(PsiBuilder b, int l) {
+    return terminator(b, l + 1);
+  }
+
+  /* ********************************************************** */
   // '^' | '**' | '.^' | '.**'
   static boolean exponent_op(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "exponent_op")) return false;
@@ -146,13 +162,76 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // !<<eof>> (statement|CRLF|COMMENT)
+  // expr (terminator|<<eof>>)
+  public static boolean expr_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_statement")) return false;
+    boolean r;
+    Marker m = enter_section_(b, l, _NONE_, "<expr statement>");
+    r = expr(b, l + 1, -1);
+    r = r && expr_statement_1(b, l + 1);
+    exit_section_(b, l, m, EXPR_STATEMENT, r, false, null);
+    return r;
+  }
+
+  // terminator|<<eof>>
+  private static boolean expr_statement_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "expr_statement_1")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = terminator(b, l + 1);
+    if (!r) r = eof(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // for identifier '=' expr terminator statement* (endfor|end)
+  public static boolean for_loop_statement(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_loop_statement")) return false;
+    if (!nextTokenIs(b, FOR)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokens(b, 0, FOR, IDENTIFIER);
+    r = r && consumeToken(b, ASSIGN);
+    r = r && expr(b, l + 1, -1);
+    r = r && terminator(b, l + 1);
+    r = r && for_loop_statement_5(b, l + 1);
+    r = r && for_loop_statement_6(b, l + 1);
+    exit_section_(b, m, FOR_LOOP_STATEMENT, r);
+    return r;
+  }
+
+  // statement*
+  private static boolean for_loop_statement_5(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_loop_statement_5")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!statement(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "for_loop_statement_5", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
+  // endfor|end
+  private static boolean for_loop_statement_6(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "for_loop_statement_6")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ENDFOR);
+    if (!r) r = consumeToken(b, END);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
+  // !<<eof>> statement
   static boolean item_(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "item_")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = item__0(b, l + 1);
-    r = r && item__1(b, l + 1);
+    r = r && statement(b, l + 1);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -164,18 +243,6 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     Marker m = enter_section_(b, l, _NOT_, null);
     r = !eof(b, l + 1);
     exit_section_(b, l, m, null, r, false, null);
-    return r;
-  }
-
-  // statement|CRLF|COMMENT
-  private static boolean item__1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "item__1")) return false;
-    boolean r;
-    Marker m = enter_section_(b);
-    r = statement(b, l + 1);
-    if (!r) r = consumeToken(b, CRLF);
-    if (!r) r = consumeToken(b, COMMENT);
-    exit_section_(b, m, null, r);
     return r;
   }
 
@@ -209,6 +276,41 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
+  // expr (',' expr)*
+  static boolean param_list(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "param_list")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = expr(b, l + 1, -1);
+    r = r && param_list_1(b, l + 1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  // (',' expr)*
+  private static boolean param_list_1(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "param_list_1")) return false;
+    int c = current_position_(b);
+    while (true) {
+      if (!param_list_1_0(b, l + 1)) break;
+      if (!empty_element_parsed_guard_(b, "param_list_1", c)) break;
+      c = current_position_(b);
+    }
+    return true;
+  }
+
+  // ',' expr
+  private static boolean param_list_1_0(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "param_list_1_0")) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeToken(b, ",");
+    r = r && expr(b, l + 1, -1);
+    exit_section_(b, m, null, r);
+    return r;
+  }
+
+  /* ********************************************************** */
   // '++' | '--'
   static boolean postfix_op(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "postfix_op")) return false;
@@ -239,25 +341,29 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // expr (';'|CRLF|<<eof>>)
+  // expr_statement
+  //     | for_loop_statement
+  //     | empty_statement
   public static boolean statement(PsiBuilder b, int l) {
     if (!recursion_guard_(b, l, "statement")) return false;
     boolean r;
-    Marker m = enter_section_(b, l, _NONE_, "<statement>");
-    r = expr(b, l + 1, -1);
-    r = r && statement_1(b, l + 1);
+    Marker m = enter_section_(b, l, _COLLAPSE_, "<statement>");
+    r = expr_statement(b, l + 1);
+    if (!r) r = for_loop_statement(b, l + 1);
+    if (!r) r = empty_statement(b, l + 1);
     exit_section_(b, l, m, STATEMENT, r, false, null);
     return r;
   }
 
-  // ';'|CRLF|<<eof>>
-  private static boolean statement_1(PsiBuilder b, int l) {
-    if (!recursion_guard_(b, l, "statement_1")) return false;
+  /* ********************************************************** */
+  // ';'|CRLF|COMMENT
+  static boolean terminator(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "terminator")) return false;
     boolean r;
     Marker m = enter_section_(b);
     r = consumeToken(b, SEMICOLON);
     if (!r) r = consumeToken(b, CRLF);
-    if (!r) r = eof(b, l + 1);
+    if (!r) r = consumeToken(b, COMMENT);
     exit_section_(b, m, null, r);
     return r;
   }
@@ -306,13 +412,14 @@ public class OctaveParser implements PsiParser, LightPsiParser {
   // 9: PREFIX(unary_expr)
   // 10: POSTFIX(transpose_expr) BINARY(exponent_expr)
   // 11: POSTFIX(postfix_expr)
-  // 12: ATOM(paren_expr) ATOM(literal_expr) ATOM(identifier_expr)
+  // 12: ATOM(func_call_expr) ATOM(paren_expr) ATOM(literal_expr) ATOM(identifier_expr)
   public static boolean expr(PsiBuilder b, int l, int g) {
     if (!recursion_guard_(b, l, "expr")) return false;
     addVariant(b, "<expr>");
     boolean r, p;
     Marker m = enter_section_(b, l, _NONE_, "<expr>");
     r = unary_expr(b, l + 1);
+    if (!r) r = func_call_expr(b, l + 1);
     if (!r) r = paren_expr(b, l + 1);
     if (!r) r = literal_expr(b, l + 1);
     if (!r) r = identifier_expr(b, l + 1);
@@ -392,6 +499,27 @@ public class OctaveParser implements PsiParser, LightPsiParser {
     r = p && expr(b, l, 9);
     exit_section_(b, l, m, UNARY_EXPR, r, p, null);
     return r || p;
+  }
+
+  // identifier '(' param_list? ')'
+  public static boolean func_call_expr(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_call_expr")) return false;
+    if (!nextTokenIsFast(b, IDENTIFIER)) return false;
+    boolean r;
+    Marker m = enter_section_(b);
+    r = consumeTokenSmart(b, IDENTIFIER);
+    r = r && consumeToken(b, L_PAREN);
+    r = r && func_call_expr_2(b, l + 1);
+    r = r && consumeToken(b, R_PAREN);
+    exit_section_(b, m, FUNC_CALL_EXPR, r);
+    return r;
+  }
+
+  // param_list?
+  private static boolean func_call_expr_2(PsiBuilder b, int l) {
+    if (!recursion_guard_(b, l, "func_call_expr_2")) return false;
+    param_list(b, l + 1);
+    return true;
   }
 
   // '(' expr ')'
